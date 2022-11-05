@@ -1,4 +1,4 @@
-import { response } from '../../common/response';
+import { response, UnAuthorizedError } from '../../common/response';
 import { ResponseInterface } from '../../common/types/response.interface';
 import { allStoresAmountService, storesAmountService } from './amount-service';
 import { APIGatewayProxyEvent } from 'aws-lambda';
@@ -16,6 +16,9 @@ export const allStoresAmountController =
 export const storeAmountController = async (
   event: APIGatewayProxyEvent,
 ): Promise<ResponseInterface> => {
+  if (event['jwtLevel'] !== 2) {
+    return UnAuthorizedError();
+  }
   const amount = await storesAmountService(event.pathParameters.storeId);
   return response(200, {
     result: true,
