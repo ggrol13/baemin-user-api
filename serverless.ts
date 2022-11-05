@@ -1,5 +1,10 @@
 import type { AWS } from '@serverless/typescript';
 import { storeEvents } from './src/api/store/store-events';
+import { accountEvents } from './src/api/account/account-events';
+import { paymentEvents } from './src/api/payments/payment-events';
+import { orderEvents } from './src/api/order/order-events';
+import { amountEvents } from './src/api/amount/amount-events';
+import { bMartEvents } from './src/api/b-mart/b-mart-events';
 
 const serverlessConfiguration: AWS = {
   service: 'baemin-user-api',
@@ -23,6 +28,26 @@ const serverlessConfiguration: AWS = {
     store: {
       handler: `src/handler/handler.store`,
       events: [...storeEvents],
+    },
+    account: {
+      handler: `src/handler/handler.account`,
+      events: [...accountEvents],
+    },
+    payment: {
+      handler: `src/handler/handler.payment`,
+      events: [...paymentEvents],
+    },
+    order: {
+      handler: `src/handler/handler.order`,
+      events: [...orderEvents],
+    },
+    amount: {
+      handler: `src/handler/handler.amount`,
+      events: [...amountEvents],
+    },
+    bMart: {
+      handler: `src/handler/handler.bMart`,
+      events: [...bMartEvents],
     },
   },
   package: { individually: true },

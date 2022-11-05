@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title; %></title>
+</head>
+<body>
+<section>
+    <h1>구매하기</h1>
+    <img src="/images/toss-tee.png" style="max-width: 100%" />
+    <h3>토스 티셔츠</h3>
+    <span>1,000 원</span>
+    <button id="payment-button">결제하기</button>
+</section>
+<script src="https://js.tosspayments.com/v1"></script>
+<script>
+
+  // const secretKey = "test_ak_ZORzdMaqN3wQd5k6ygr5AkYXQGwy";
+  // const tossPayments = TossPayments("test_ak_ZORzdMaqN3wQd5k6ygr5AkYXQGwy");
+
+  var clientKey = "test_ck_OEP59LybZ8Bdv6A1JxkV6GYo7pRe";
+  var tossPayments = TossPayments(clientKey);
+
+  const button = document.getElementById("payment-button");
+
+  button.addEventListener("click", function() {
+    console.log("asdfsdf");
+    tossPayments.requestPayment("카드", {
+      amount: 1000,
+      orderId: "<%= orderId; %>",
+      orderName: "토스 티셔츠",
+      customerName: "<%= customerName; %>",
+      successUrl: window.location.origin + "/dev/payment/success?storeId=62efb5ad1dc546fd2ed32309",
+      failUrl: window.location.origin + "/dev/payment/fail"
+    });
+  });
+</script>
+</body>
+</html>

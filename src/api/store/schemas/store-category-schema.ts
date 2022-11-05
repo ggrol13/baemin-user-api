@@ -1,5 +1,5 @@
 import mongoose, { model } from 'mongoose';
-import { StoreCategoryModelInterface } from './types/store-category.interface';
+import { StoreCategoryModelInterface } from './types/store-category-interface';
 
 const storeCategorySchema = new mongoose.Schema({
   name: { type: String, required: true },

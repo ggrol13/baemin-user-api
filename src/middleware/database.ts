@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { MiddlewareObj } from '@middy/core';
 
 let isConn = false;
 export const connectMongo = async () => {
@@ -14,4 +15,14 @@ export const connectMongo = async () => {
   } catch (e) {
     return await Promise.reject(e);
   }
+};
+
+export const connectMongoMiddleWare = (): MiddlewareObj => {
+  const customMiddlewareBefore = () => {
+    connectMongo().then().catch();
+  };
+
+  return {
+    before: customMiddlewareBefore,
+  };
 };

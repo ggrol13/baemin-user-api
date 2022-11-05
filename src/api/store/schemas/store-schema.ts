@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose, { model } from 'mongoose';
+import { StoreModelInterface } from './types/store-interface';
 
 export const storeSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -29,3 +30,9 @@ export const storeSchema = new mongoose.Schema({
     },
   ],
 });
+
+export const StoreModel = model<StoreModelInterface>(
+  'Store',
+  storeSchema,
+  'stores',
+);

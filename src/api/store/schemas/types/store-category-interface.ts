@@ -1,13 +1,13 @@
 import { Document, Model } from 'mongoose';
 
-export interface BasicStoreCategoryInterface {
+export interface BaseStoreCategoryInterface {
   name: string;
   imgPath: string;
   storeId: string[];
 }
 
 export interface StoreCategoryInterface
-  extends BasicStoreCategoryInterface,
+  extends BaseStoreCategoryInterface,
     Document {}
 
 export type StoreCategoryModelInterface = Model<StoreCategoryInterface>;
