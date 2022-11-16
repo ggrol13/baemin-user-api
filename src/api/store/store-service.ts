@@ -44,6 +44,7 @@ import {
   findStoreBasketByStoreId,
   insertStoreBasket,
 } from './repositories/store-basket-repo';
+import mongoose from 'mongoose';
 
 export const getStoreCategoryService = async (
   storeCategoryId,
@@ -75,7 +76,7 @@ export const getStoreReviewService = async (): Promise<
 
 export const storeReviewService = async (
   body: StoreUserReviewInterface,
-  userId: string,
+  userId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewModelInterface> => {
   body.userId = userId;
   body.createdAt = new Date();
@@ -95,8 +96,8 @@ const checkError = <T>(data: T) => {
 
 export const storeOwnerReviewService = async (
   body: StoreOwnerReviewInterface,
-  ownerId: string,
-  commentId: string,
+  ownerId: mongoose.Schema.Types.ObjectId,
+  commentId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface | boolean> => {
   const { ownerComment } = body;
   ownerComment.owner = '사장님';
@@ -113,8 +114,8 @@ export const storeOwnerReviewService = async (
 };
 
 export const storeUserReviewDeleteService = async (
-  commentId: string,
-  userId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId,
 ): Promise<boolean> => {
   try {
     await deleteStoreUserReview(commentId, userId);
@@ -125,8 +126,8 @@ export const storeUserReviewDeleteService = async (
 };
 
 export const storeOwnerReviewDeleteService = async (
-  commentId: string,
-  ownerId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  ownerId: mongoose.Schema.Types.ObjectId,
 ): Promise<boolean> => {
   try {
     await deleteStoreOwnerReview(commentId, ownerId);
@@ -138,8 +139,8 @@ export const storeOwnerReviewDeleteService = async (
 
 export const storeUserReviewModifyService = async (
   body: StoreUserReviewInterface,
-  commentId: string,
-  userId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface> => {
   body.userId = userId;
   body.createdAt = new Date();
@@ -148,8 +149,8 @@ export const storeUserReviewModifyService = async (
 
 export const storeOwnerReviewModifyService = async (
   body: StoreOwnerReviewInterface,
-  commentId: string,
-  ownerId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  ownerId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface> => {
   body.ownerComment.owner = '사장님';
   body.ownerComment.ownerId = ownerId;
@@ -183,7 +184,6 @@ export const storeBasketService = async (
   const basket = await findStoreBasketByStoreId();
   if (basket && basket['storeId'] !== storeId) {
     await deleteStoreBasketAll();
-    return 'deleted';
   }
   body.storeId = storeId;
   body.userId = userId;

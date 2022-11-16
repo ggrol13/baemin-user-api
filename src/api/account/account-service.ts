@@ -23,10 +23,9 @@ export const registerService = async (
     username: Joi.string().alphanum().min(4).max(15).required(),
     email: Joi.string().email().required(),
     password: Joi.string().required().min(6),
-    jwtLevel: Joi.number().integer().min(1).max(2).required(),
+    jwtLevel: Joi.number().integer().min(1).max(3).required(),
     storeId: Joi.string(),
   });
-  console.log(event.body);
 
   const result = schema.validate(JSON.parse(event.body));
 

@@ -5,6 +5,7 @@ import { paymentEvents } from './src/api/payments/payment-events';
 import { orderEvents } from './src/api/order/order-events';
 import { amountEvents } from './src/api/amount/amount-events';
 import { bMartEvents } from './src/api/b-mart/b-mart-events';
+import { shoppingLiveEvents } from './src/api/shopping-live/shopping-live-events';
 
 const serverlessConfiguration: AWS = {
   service: 'baemin-user-api',
@@ -48,6 +49,10 @@ const serverlessConfiguration: AWS = {
     bMart: {
       handler: `src/handler/handler.bMart`,
       events: [...bMartEvents],
+    },
+    shoppingLive: {
+      handler: `src/handler/handler.shoppingLive`,
+      events: [...shoppingLiveEvents],
     },
   },
   package: { individually: true },

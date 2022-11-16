@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { OrderInterface } from './types/order-interface';
 
-const OrderSchema = new mongoose.Schema({
+const OrderStoreSchema = new mongoose.Schema({
   storeId: mongoose.Schema.Types.ObjectId,
   menu: [
     {
@@ -25,8 +25,8 @@ const OrderSchema = new mongoose.Schema({
   maxDeliveryTime: Number,
 });
 
-export const OrderSchemaModel = mongoose.model<OrderInterface>(
+export const OrderStoreSchemaModel = mongoose.model<OrderInterface>(
   'Ordered',
-  OrderSchema,
+  OrderStoreSchema,
   'Ordered',
 );

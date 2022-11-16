@@ -3,15 +3,15 @@ import mongoose, { Document, Model } from 'mongoose';
 export interface BaseStoreReviewInterface {
   score: number;
   storeId: mongoose.Schema.Types.ObjectId;
-  userId: string;
+  userId: mongoose.Schema.Types.ObjectId;
   comment: string;
-  menuId: string;
+  menuId: mongoose.Schema.Types.ObjectId;
   flag: boolean;
   ownerComment: {
     owner: string;
     createdAt: Date;
     comment: string;
-    ownerId: string;
+    ownerId: mongoose.Schema.Types.ObjectId;
   };
   createdAt: Date;
   imgPath: string[];
@@ -27,7 +27,7 @@ export interface StoreOwnerReviewInterface {
     owner: string;
     createdAt: Date;
     comment: string;
-    ownerId: string;
+    ownerId: mongoose.Schema.Types.ObjectId;
   };
 }
 

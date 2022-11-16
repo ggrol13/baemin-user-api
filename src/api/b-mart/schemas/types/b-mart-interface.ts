@@ -1,9 +1,17 @@
-import { Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-export interface ProductCategoryInterface {
+export interface ProductInterface {
+  examineYN: boolean;
   name: string;
-  imgPath: string;
-  productId: string[];
+  price: number;
+  imgPath: [{ path: string; imageName: string; number: number }];
+  deliveryTime: string;
+  information: string;
+  infoDetail: string;
+  refundReturn: {
+    deliveryInfo: string;
+    sellerInfo: string;
+    refundReturnInfo: string;
+  };
+  categoryId: mongoose.Types.ObjectId;
 }
-
-export type ProductCategoryModelInterface = Model<ProductCategoryInterface>;

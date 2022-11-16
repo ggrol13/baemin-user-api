@@ -1,7 +1,7 @@
-import { OrderSchemaModel } from '../../order/schemas/order-schema';
+import { OrderStoreSchemaModel } from '../../order/schemas/order-store-schema';
 
 export const aggregateAllStoresAmount = async () => {
-  return OrderSchemaModel.aggregate([
+  return OrderStoreSchemaModel.aggregate([
     {
       $unwind: '$menu',
     },
@@ -28,7 +28,7 @@ export const aggregateAllStoresAmount = async () => {
 };
 
 export const aggregateStoreAmount = async (storeId) => {
-  return OrderSchemaModel.aggregate([
+  return OrderStoreSchemaModel.aggregate([
     { $match: { storeId } },
     {
       $unwind: '$menu',

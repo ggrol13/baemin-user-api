@@ -73,7 +73,7 @@ export const storeEvents = [
   {
     http: {
       method: 'delete',
-      path: 'store/basket/{storeId}',
+      path: 'store/basket/{basketId}',
     },
   },
 ];

@@ -1,5 +1,5 @@
 import mongoose, { model } from 'mongoose';
-import { ProductCategoryModelInterface } from './types/b-mart-interface';
+import { ProductCategoryInterface } from './types/b-mart-category-interface';
 
 const productCategorySchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -7,7 +7,7 @@ const productCategorySchema = new mongoose.Schema({
   productId: [{ type: mongoose.Schema.Types.ObjectId, required: false }],
 });
 
-export const ProductCategoryModel = model<ProductCategoryModelInterface>(
+export const ProductCategoryModel = model<ProductCategoryInterface>(
   'bMartProductCategory',
   productCategorySchema,
   'bMartProductCategory',

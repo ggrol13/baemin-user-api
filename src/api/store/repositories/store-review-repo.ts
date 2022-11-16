@@ -5,6 +5,7 @@ import {
   StoreUserReviewInterface,
 } from '../schemas/types/store-review-interface';
 import { StoreReviewModel } from '../schemas/store-review-schema';
+import mongoose from 'mongoose';
 
 export const saveStoreUserReview = async (
   body: StoreUserReviewInterface,
@@ -31,7 +32,7 @@ export const findStoreReview = async () => {
 export const saveOwnerReview = async (
   body: StoreOwnerReviewInterface,
   storeId: string,
-  commentId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface> => {
   return StoreReviewModel.findOneAndUpdate(
     { storeId, _id: commentId },
@@ -41,15 +42,15 @@ export const saveOwnerReview = async (
 };
 
 export const deleteStoreUserReview = async (
-  commentId: string,
-  userId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId,
 ) => {
   await StoreReviewModel.findOneAndDelete({ _id: commentId, userId }).exec();
 };
 
 export const deleteStoreOwnerReview = async (
-  commentId: string,
-  ownerId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  ownerId: mongoose.Schema.Types.ObjectId,
 ) => {
   await StoreReviewModel.findOneAndUpdate(
     {
@@ -67,8 +68,8 @@ export const deleteStoreOwnerReview = async (
 
 export const updateStoreUserReview = async (
   body: StoreUserReviewInterface,
-  commentId: string,
-  userId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface> => {
   console.log(body);
   return StoreReviewModel.findOneAndUpdate(
@@ -87,8 +88,8 @@ export const updateStoreUserReview = async (
 
 export const updateStoreOwnerReview = async (
   body: StoreOwnerReviewInterface,
-  commentId: string,
-  ownerId: string,
+  commentId: mongoose.Schema.Types.ObjectId,
+  ownerId: mongoose.Schema.Types.ObjectId,
 ): Promise<StoreReviewInterface> => {
   return StoreReviewModel.findOneAndUpdate(
     {

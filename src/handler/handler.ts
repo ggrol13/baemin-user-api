@@ -9,6 +9,7 @@ import { paymentRouter } from '../api/payments/payment-router';
 import { orderRouter } from '../api/order/order-router';
 import { amountRouter } from '../api/amount/amount-router';
 import { bMartRouter } from '../api/b-mart/b-mart-router';
+import { shoppingLiveRouter } from '../api/shopping-live/shopping-live-router';
 
 export const storeHandler = async (
   event: APIGatewayProxyEvent,
@@ -71,5 +72,16 @@ const bMartHandler = async (
 };
 
 export const bMart = middy(bMartHandler)
+  .use(connectMongoMiddleWare())
+  .use(jwtMiddleware());
+
+const shoppingLiveHandler = async (
+  event: APIGatewayProxyEvent,
+  context: Context,
+): Promise<ResponseInterface> => {
+  return shoppingLiveRouter(event, context);
+};
+
+export const shoppingLive = middy(shoppingLiveHandler)
   .use(connectMongoMiddleWare())
   .use(jwtMiddleware());
